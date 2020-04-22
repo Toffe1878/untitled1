@@ -4,6 +4,8 @@ from flask_security import Security, SQLAlchemyUserDatastore, login_required, \
     UserMixin, RoleMixin
 from flask_security.utils import hash_password
 
+
+
 app = Flask(__name__)
 
 db = SQLAlchemy(app)
@@ -51,6 +53,7 @@ def register():
             email=request.form.get('email'),
             password=hash_password(request.form.get('password'))
         )
+        db.init_app(app)
         db.session.commit()
 
         return redirect(url_for('profile'))
